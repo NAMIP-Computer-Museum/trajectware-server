@@ -27,7 +27,7 @@ public class ImageApiServiceImpl extends ImageApiService {
     public Response getImageById(Long fileId, SecurityContext securityContext) throws NotFoundException {
       String query = "SELECT * FROM Photo WHERE PhotoId = ?";
       File fi = new File();
-      Connection conn = ConnectionManager.getConnection();
+      Connection conn = DBManager.getConnection();
       try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
     	  preparedStmt.setLong(1, fileId);
 	      ResultSet rst = preparedStmt.executeQuery();

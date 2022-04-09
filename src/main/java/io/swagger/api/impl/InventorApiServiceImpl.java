@@ -38,7 +38,7 @@ public class InventorApiServiceImpl extends InventorApiService {
     public Response addInventor(Inventor inventor, SecurityContext securityContext) throws NotFoundException {
     	String query = "INSERT INTO Inventor(Name, Birthdate, Deathdate, Nationalite, EntityId, Firstname, Status) VALUES(?,?,?,?,?,?,?)";
     	
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
     	try (PreparedStatement pstmt = conn.prepareStatement(query)) {
 	        pstmt.setString(1, inventor.getName());
 	        pstmt.setString(2, inventor.getBirthdate());
@@ -58,7 +58,7 @@ public class InventorApiServiceImpl extends InventorApiService {
     @Override
     public Response deleteInventor(Long inventorId, String apiKey, SecurityContext securityContext) throws NotFoundException {
         String query = "DELETE FROM Inventor WHERE EntityId = ?";
-        Connection conn = ConnectionManager.getConnection();
+        Connection conn = DBManager.getConnection();
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
   	        pstmt.setLong(1, inventorId);
   	        pstmt.executeUpdate();
@@ -73,7 +73,7 @@ public class InventorApiServiceImpl extends InventorApiService {
     public Response findInventorByInvention( @NotNull List<String> invention, SecurityContext securityContext) throws NotFoundException {
 		String query = "SELECT Name, Birthdate, Deathdate, Nationalite, EntityId, Firstname, Status from Inventor WHERE EntityId = ? UNION SELECT * FROM Invention WHERE EntityId = ? ORDER BY EntityId.Inventor"; 
 		Inventor inv=new Inventor();
-		Connection conn = ConnectionManager.getConnection();
+		Connection conn = DBManager.getConnection();
 		try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 		ResultSet rst = preparedStmt.executeQuery();
 		System.out.println("tName\t\tBirthdate\t\tDeathdate\t\tNationalite\t\tEntityId\t\tFirstname\t\tStatus\n");
@@ -110,7 +110,7 @@ public class InventorApiServiceImpl extends InventorApiService {
     	String query = "SELECT Name, Birthdate, Deathdate, Nationalite, EntityId, Firstname, Status FROM Inventor WHERE Name = ?";
     	Inventor inv=new Inventor();
     	
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
     	try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
     	preparedStmt.setString(1, name);
 
@@ -147,7 +147,7 @@ public class InventorApiServiceImpl extends InventorApiService {
     public Response findInventorsByStatus( @NotNull String status, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, Birthdate, Deathdate, Nationalite, EntityId, Firstname, Status from Inventor WHERE Status = ?";
     	Inventor inv=new Inventor();
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
     	try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
     	preparedStmt.setString(1, status);
 		ResultSet rst = preparedStmt.executeQuery();
@@ -180,7 +180,7 @@ public class InventorApiServiceImpl extends InventorApiService {
     public Response getInventorById(Long inventorId, SecurityContext securityContext) throws NotFoundException {
        	String query = "SELECT Name, Birthdate, Deathdate, Nationalite, EntityId, Firstname, Status from Inventor WHERE EntityId = ?";
        	Inventor inv=new Inventor();
-       	Connection conn = ConnectionManager.getConnection();
+       	Connection conn = DBManager.getConnection();
        	try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
    		preparedStmt.setLong(1, inventorId);
 		ResultSet rst = preparedStmt.executeQuery();
@@ -215,7 +215,7 @@ public class InventorApiServiceImpl extends InventorApiService {
     public Response inventorfindByDate( String date, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, Birthdate, Deathdate, Nationalite, EntityId, Firstname, Status from Inventor WHERE Birthdate = ?"; 
     	Inventor inv=new Inventor();
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
     	try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
     	preparedStmt.setString(1, date);
 		ResultSet rst = preparedStmt.executeQuery();
@@ -250,7 +250,7 @@ public class InventorApiServiceImpl extends InventorApiService {
     @Override
     public Response updateInventor(Inventor inventor, SecurityContext securityContext) throws NotFoundException {
     	String query = "UPDATE Inventor SET Name = ?, Birthdate = ?, Deathdate = ?, Nationalite = ?, Firstname = ?, Status = ? where EntityId = ?"; 
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
     	try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 	    preparedStmt.setString(1, inventor.getName());
 	    preparedStmt.setString(2, inventor.getBirthdate());
@@ -277,7 +277,7 @@ public class InventorApiServiceImpl extends InventorApiService {
      String homeDir = System.getProperty("user.home"); 
      String filename = "inventor-"+inventorId+".jpg";
      File file=new File("images",filename);
-     Connection conn = ConnectionManager.getConnection();
+     Connection conn = DBManager.getConnection();
      try (   FileOutputStream fout=new FileOutputStream(file);
 	 		 PreparedStatement preparedStmt = conn.prepareStatement(query)){
          // set parameters

@@ -33,7 +33,7 @@ public class InventionApiServiceImpl extends InventionApiService {
     @Override
     public Response addInvention(Invention body, SecurityContext securityContext) throws NotFoundException {
     	String query = "INSERT INTO Invention(Name, Status, Startdate, Finsihdate) VALUES(?,?,?,?)";
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
  	    try (PreparedStatement pstmt = conn.prepareStatement(query)) {
  	        pstmt.setString(1, body.getName());
  	        pstmt.setString(2, body.getStatus());
@@ -50,7 +50,7 @@ public class InventionApiServiceImpl extends InventionApiService {
     @Override
     public Response deleteInvention(Long inventionId, String apiKey, SecurityContext securityContext) throws NotFoundException {
     	String query = "DELETE FROM Invention WHERE EntityId = ?";
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
     	try (PreparedStatement pstmt = conn.prepareStatement(query)) {
 	        pstmt.setLong(1, inventionId);
 	        pstmt.executeUpdate();
@@ -65,7 +65,7 @@ public class InventionApiServiceImpl extends InventionApiService {
     public Response findByDate( String date, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, EntityId, Status, Startdate, Finsihdate FROM Invention WHERE Startdate = ?"; 
 		Invention inv = new Invention();
-		Connection conn = ConnectionManager.getConnection();
+		Connection conn = DBManager.getConnection();
 		try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 			preparedStmt.setString(1, date);
 			ResultSet rst = preparedStmt.executeQuery();
@@ -96,7 +96,7 @@ public class InventionApiServiceImpl extends InventionApiService {
     public Response findInventionByInventor( @NotNull List<String> inventor, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, EntityId, Status, Startdate, Finsihdate FROM Invention WHERE EntityId = ? UNION SELECT * FROM INVENTOR WHERE EntityId = ? ORDER BY EntityId.Invention";
 		Invention inv = new Invention();
-		Connection conn = ConnectionManager.getConnection();
+		Connection conn = DBManager.getConnection();
 		try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 			ResultSet rst = preparedStmt.executeQuery();
 			System.out.println("tName\t\tEntityId\t\tStatus\t\tStartdate\t\tFinsihdate\n");
@@ -124,7 +124,7 @@ public class InventionApiServiceImpl extends InventionApiService {
     public Response findInventionBysByTags( @NotNull List<String> tags,  String date, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, EntityId, Status, Startdate, Finsihdate FROM Invention WHERE EntityId = ?";
 		Invention inv = new Invention();
-		Connection conn = ConnectionManager.getConnection();
+		Connection conn = DBManager.getConnection();
 		try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 			preparedStmt.setArray(1, (Array) tags);
 			ResultSet rst = preparedStmt.executeQuery();
@@ -155,7 +155,7 @@ public class InventionApiServiceImpl extends InventionApiService {
     public Response findInventionsByName( @NotNull String name, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, EntityId, Status, Startdate, Finsihdate from Invention WHERE Name = ?"; 
 		Invention inv = new Invention();
-		Connection conn = ConnectionManager.getConnection();
+		Connection conn = DBManager.getConnection();
     	try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
     		preparedStmt.setString(1, name);
 			ResultSet rst = preparedStmt.executeQuery();
@@ -185,7 +185,7 @@ public class InventionApiServiceImpl extends InventionApiService {
     public Response findInventionsByStatus( @NotNull String status, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, EntityId, Status, Startdate, Finsihdate FROM Invention WHERE Status = ?";
 		Invention inv = new Invention();
-		Connection conn = ConnectionManager.getConnection();
+		Connection conn = DBManager.getConnection();
 		try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 			preparedStmt.setString(1, status);
 			ResultSet rst = preparedStmt.executeQuery();
@@ -216,7 +216,7 @@ public class InventionApiServiceImpl extends InventionApiService {
     public Response getInventionById(Long inventionId, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, EntityId, Status, Startdate, Finsihdate FROM Invention WHERE EntityId = ?";
 		Invention inv = new Invention();
-		Connection conn = ConnectionManager.getConnection();
+		Connection conn = DBManager.getConnection();
 		try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 			preparedStmt.setLong(1, inventionId);
 			ResultSet rst = preparedStmt.executeQuery();
@@ -246,7 +246,7 @@ public class InventionApiServiceImpl extends InventionApiService {
     @Override
     public Response updateInvention(Invention body, SecurityContext securityContext) throws NotFoundException {
        	String query = "UPDATE Invention SET Name = ?, Status = ?, Startdate = ?, Finsihdate = ? WHERE EntityId = ?"; 
-       	Connection conn = ConnectionManager.getConnection();
+       	Connection conn = DBManager.getConnection();
 		try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 	    preparedStmt.setString(1, body.getName());
 	    preparedStmt.setString(2, body.getStatus());
@@ -271,7 +271,7 @@ public class InventionApiServiceImpl extends InventionApiService {
          String homeDir = System.getProperty("user.home"); 
          String filename = "invention-"+inventionId+".jpg";
          File file=new File("images",filename);
-         Connection conn = ConnectionManager.getConnection();
+         Connection conn = DBManager.getConnection();
          try (   FileOutputStream fout=new FileOutputStream(file);
     	 		 PreparedStatement preparedStmt = conn.prepareStatement(query)){
              // set parameters

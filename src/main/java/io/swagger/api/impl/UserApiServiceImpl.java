@@ -23,7 +23,7 @@ public class UserApiServiceImpl extends UserApiService {
     public Response adduser(User body, SecurityContext securityContext) throws NotFoundException {
 		String query = "INSERT INTO User(Username, UserId, FirstName, LastName, Email, Phone, Password) VALUES(?,?,?,?,?,?;?)";
 		    	
-		    	Connection conn = ConnectionManager.getConnection();
+		    	Connection conn = DBManager.getConnection();
 		    	try (PreparedStatement pstmt = conn.prepareStatement(query)) {
 			        pstmt.setString(1, body.getUsername());
 			        pstmt.setLong(2, body.getId());
@@ -42,7 +42,7 @@ public class UserApiServiceImpl extends UserApiService {
     @Override
     public Response deleteUser(String username, SecurityContext securityContext) throws NotFoundException {
        	String query = "DELETE FROM User WHERE UserId = ?";
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
     	try (PreparedStatement pstmt = conn.prepareStatement(query)) {
 		    pstmt.setString(1, null);
 		    pstmt.executeUpdate();
@@ -56,7 +56,7 @@ public class UserApiServiceImpl extends UserApiService {
     public Response getUserByName(String username, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Username, UserId, FirstName, LastName, Email, Phone, Password FROM User WHERE Username = ?"; 
 		User usr = new User();
-		Connection conn = ConnectionManager.getConnection();
+		Connection conn = DBManager.getConnection();
     	try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
     		preparedStmt.setString(1, username);
 			ResultSet rst = preparedStmt.executeQuery();
@@ -97,7 +97,7 @@ public class UserApiServiceImpl extends UserApiService {
     @Override
     public Response updateUser(String username, User body, SecurityContext securityContext) throws NotFoundException {
        	String query = "UPDATE Actor SET Username = ?, FirstName = ?, LastName = ?, Email = ?, Phone = ?, Password = ? where UserId = ?"; 
-    	try (Connection conn = ConnectionManager.getConnection();
+    	try (Connection conn = DBManager.getConnection();
 				PreparedStatement preparedStmt = conn.prepareStatement(query)){
 		    preparedStmt.setString(1, body.getUsername());
 		    preparedStmt.setString(2, body.getFirstName());

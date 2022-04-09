@@ -26,7 +26,7 @@ public class EventApiServiceImpl extends EventApiService {
     @Override
     public Response addevent(Event events, SecurityContext securityContext) throws NotFoundException {
     	String query = "INSERT INTO Event(Name, Startdate, Enddate) VALUES(?,?,?)";
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
 	    try (PreparedStatement pstmt = conn.prepareStatement(query)) {
 	        pstmt.setString(1, events.getName());
 	        pstmt.setString(2, events.getStartdate());
@@ -42,7 +42,7 @@ public class EventApiServiceImpl extends EventApiService {
     @Override
     public Response deleteEvent(Long eventId, String apiKey, SecurityContext securityContext) throws NotFoundException {
        	String query = "DELETE FROM Event WHERE EventId = ?";
-       	Connection conn = ConnectionManager.getConnection();
+       	Connection conn = DBManager.getConnection();
     	try (PreparedStatement pstmt = conn.prepareStatement(query)) {
   	        pstmt.setLong(1, eventId);
   	        pstmt.executeUpdate();
@@ -56,7 +56,7 @@ public class EventApiServiceImpl extends EventApiService {
     public Response eventfindByDate( String date, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, EventId, Startdate, Enddate FROM Event WHERE Startdate = ?"; 
 		Event eve = new Event();
-		Connection conn = ConnectionManager.getConnection();
+		Connection conn = DBManager.getConnection();
     	try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
     		preparedStmt.setString(1, date);
 			ResultSet rst = preparedStmt.executeQuery();
@@ -84,7 +84,7 @@ public class EventApiServiceImpl extends EventApiService {
     public Response findEventsByInvention( @NotNull List<String> event, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT * FROM (SELECT Name, EventId, Startdate, Enddate FROM Event WHERE EventId = ? UNION SELECT EventId, EntityId FROM Participation WHERE EventId = ? AND EntityId = ? UNION SELECT EntityId FROM Invention Where EntityId = ? ORDER BY EventId";
     	Event eve = new Event();
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
     	try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 		ResultSet rst = preparedStmt.executeQuery();
 		System.out.println("tName\t\tEventId\t\tStartdate\t\tEnddate\n");
@@ -111,7 +111,7 @@ public class EventApiServiceImpl extends EventApiService {
     public Response findEventsByInventor( @NotNull List<String> event, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT * FROM (SELECT Name, EventId, Startdate, Enddate FROM Event WHERE EventId = ? UNION SELECT EventId, EntityId FROM Participation WHERE EventId = ? and EntityId = ? UNION SELECT EntityId FROM INVENTOR WHERE EntityId = ? ORDER BY EventId";
     	Event eve = new Event();
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
 		try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 		ResultSet rst = preparedStmt.executeQuery();
 		System.out.println("tName\t\tEventId\t\tStartdate\t\tEnddate\n");
@@ -138,7 +138,7 @@ public class EventApiServiceImpl extends EventApiService {
     public Response findEventsByName( @NotNull String name, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, EventId, Startdebut, Enddate FROM Event WHERE Name = ?";
     	Event eve = new Event();
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
     	try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
     		preparedStmt.setString(1, name);
 			ResultSet rst = preparedStmt.executeQuery();
@@ -166,7 +166,7 @@ public class EventApiServiceImpl extends EventApiService {
     public Response getEventById(Long eventId, SecurityContext securityContext) throws NotFoundException {
     	String query = "SELECT Name, EventId, Startdate, Enddate FROM Event WHERE EventId = ?";
     	Event eve = new Event();
-    	Connection conn = ConnectionManager.getConnection();
+    	Connection conn = DBManager.getConnection();
 		try (PreparedStatement preparedStmt = conn.prepareStatement(query)){
 			preparedStmt.setLong(1, eventId);
 			ResultSet rst = preparedStmt.executeQuery();
@@ -199,7 +199,7 @@ public class EventApiServiceImpl extends EventApiService {
     public Response updateevent(Event events, SecurityContext securityContext) throws NotFoundException {
     	String query = "UPDATE Event SET Name = ?, Startdate = ?, Enddate = ? WHERE EventId = ?"; 
 		
-		try (Connection conn = ConnectionManager.getConnection();
+		try (Connection conn = DBManager.getConnection();
 				PreparedStatement preparedStmt = conn.prepareStatement(query)){
 	    preparedStmt.setString(1, events.getName());
 	    preparedStmt.setString(2, events.getStartdate());
