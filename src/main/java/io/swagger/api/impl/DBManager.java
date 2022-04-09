@@ -1,6 +1,5 @@
 package io.swagger.api.impl;
 
-import java.net.BindException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
