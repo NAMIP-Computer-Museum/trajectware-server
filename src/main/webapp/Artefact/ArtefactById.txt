@@ -1,0 +1,12 @@
+class Artefact {
+    id: 1
+    name: Micral N
+    description: Windows 3, lancé en 1992 par Microsoft, a été la première version de Windows à pouvoir être qualifiée de système d'exploitation. Les versions précédentes étant uniquement des interfaces graphiques utilisant MS-DOS. Il exploite notamment le mode protégé 32 bits (à partir des processeurs 386).
+    creationdate: 1973
+    country: France
+    photos: [./Micro_pic/2343.jpg]
+    tags: [class Tag {
+        id: Micro
+        description: null
+    }]
+}

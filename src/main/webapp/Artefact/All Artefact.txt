@@ -1,0 +1,75 @@
+class Artefact {
+    id: 1
+    name: Micral N
+    description: Windows 3, lancé en 1992 par Microsoft, a été la première version de Windows à pouvoir être qualifiée de système d'exploitation. Les versions précédentes étant uniquement des interfaces graphiques utilisant MS-DOS. Il exploite notamment le mode protégé 32 bits (à partir des processeurs 386).
+    creationdate: 1973
+    country: France
+    photos: [./Micro_pic/2343.jpg]
+    tags: [class Tag {
+        id: Micro
+        description: null
+    }]
+}
+
+-------------------------------------------------------------------------------------------
+
+class Artefact {
+    id: 2
+    name: Apple II Plus
+    description:  *Champ à compléter* 
+    creationdate: 1979
+    country: 
+    photos: [./Micro_pic/42.jpg]
+    tags: [class Tag {
+        id: Micro
+        description: null
+    }]
+}
+
+-------------------------------------------------------------------------------------------
+
+class Artefact {
+    id: 3
+    name: iMac G3
+    description:  *Champ à compléter* 
+    creationdate: 1998
+    country: 
+    photos: [./Micro_pic/414.jpg]
+    tags: [class Tag {
+        id: Micro
+        description: null
+    }]
+}
+
+-------------------------------------------------------------------------------------------
+
+class Artefact {
+    id: 4
+    name: Linux
+    description:  *Champ à compléter* 
+    creationdate: 1991
+    country: 
+    photos: [./OS_pic/20.jpg]
+    tags: [class Tag {
+        id: OS
+        description: null
+    }]
+}
+
+-------------------------------------------------------------------------------------------
+
+class Artefact {
+    id: 5
+    name: Pentium 4
+    description:  *Champ à compléter* 
+    creationdate: 2001
+    country: 
+    photos: [./CPU_pic/4.jpg]
+    tags: [class Tag {
+        id: CPU
+        description: null
+    }]
+}
+
+-------------------------------------------------------------------------------------------
+
