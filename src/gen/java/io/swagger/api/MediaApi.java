@@ -28,7 +28,7 @@ import javax.validation.constraints.*;
 
 
 @io.swagger.annotations.Api(description = "the media API")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-08-17T13:55:34.404Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-09-21T12:58:06.292Z")
 public class MediaApi  {
    private final MediaApiService delegate;
 
@@ -54,9 +54,27 @@ public class MediaApi  {
    }
 
     @GET
+    @Path("/audio/{fileId}")
+    
+    @Produces({ "audio/m4a" })
+    @io.swagger.annotations.ApiOperation(value = "Find an audio by its ID", notes = "Returns only one file", response = Void.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "api_key")
+    }, tags={ "media", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "successful operation", response = Void.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 403, message = "Access forbidden", response = Void.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "the event has not been found", response = Void.class) })
+    public Response getAudioById(@ApiParam(value = "the ID of the audio that need to be returned",required=true) @PathParam("fileId") String fileId
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.getAudioById(fileId,securityContext);
+    }
+    @GET
     @Path("/image/{fileId}")
     
-    @Produces({ "image/jpg" })
+    @Produces({ "image/jpg", "image/png" })
     @io.swagger.annotations.ApiOperation(value = "Find a picture by its ID", notes = "Returns only one file", response = Void.class, authorizations = {
         @io.swagger.annotations.Authorization(value = "api_key")
     }, tags={ "media", })
@@ -66,9 +84,27 @@ public class MediaApi  {
         @io.swagger.annotations.ApiResponse(code = 403, message = "Access forbidden", response = Void.class),
         
         @io.swagger.annotations.ApiResponse(code = 404, message = "the event has not been found", response = Void.class) })
-    public Response getImageById(@ApiParam(value = "the ID of the image that need to be returned",required=true) @PathParam("fileId") Long fileId
+    public Response getImageById(@ApiParam(value = "the ID of the image that need to be returned",required=true) @PathParam("fileId") String fileId
 ,@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.getImageById(fileId,securityContext);
+    }
+    @GET
+    @Path("/video/{fileId}")
+    
+    @Produces({ "video/MP4" })
+    @io.swagger.annotations.ApiOperation(value = "Find a video by its ID", notes = "Returns only one file", response = Void.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "api_key")
+    }, tags={ "media", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "successful operation", response = Void.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 403, message = "Access forbidden", response = Void.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "the event has not been found", response = Void.class) })
+    public Response getVideoById(@ApiParam(value = "the ID of the video that need to be returned",required=true) @PathParam("fileId") String fileId
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.getVideoById(fileId,securityContext);
     }
 }

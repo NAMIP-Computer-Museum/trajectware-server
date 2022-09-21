@@ -27,7 +27,7 @@ import javax.validation.Valid;
 /**
  * Artefact
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-08-17T13:55:34.404Z")public class Artefact   {
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-09-21T12:58:06.292Z")public class Artefact   {
   @JsonProperty("id")
   private Long id = null;
 
@@ -42,6 +42,9 @@ import javax.validation.Valid;
 
   @JsonProperty("country")
   private String country = null;
+
+  @JsonProperty("company")
+  private String company = null;
 
   @JsonProperty("photos")
   private List<String> photos = null;
@@ -145,6 +148,25 @@ import javax.validation.Valid;
     this.country = country;
   }
 
+  public Artefact company(String company) {
+    this.company = company;
+    return this;
+  }
+
+  /**
+   * Get company
+   * @return company
+   **/
+  @JsonProperty("company")
+  @ApiModelProperty(example = "Commodore Business Machines Inc.", value = "")
+  public String getCompany() {
+    return company;
+  }
+
+  public void setCompany(String company) {
+    this.company = company;
+  }
+
   public Artefact photos(List<String> photos) {
     this.photos = photos;
     return this;
@@ -215,13 +237,14 @@ import javax.validation.Valid;
         Objects.equals(this.description, artefact.description) &&
         Objects.equals(this.creationdate, artefact.creationdate) &&
         Objects.equals(this.country, artefact.country) &&
+        Objects.equals(this.company, artefact.company) &&
         Objects.equals(this.photos, artefact.photos) &&
         Objects.equals(this.tags, artefact.tags);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, description, creationdate, country, photos, tags);
+    return Objects.hash(id, name, description, creationdate, country, company, photos, tags);
   }
 
 
@@ -235,6 +258,7 @@ import javax.validation.Valid;
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    creationdate: ").append(toIndentedString(creationdate)).append("\n");
     sb.append("    country: ").append(toIndentedString(country)).append("\n");
+    sb.append("    company: ").append(toIndentedString(company)).append("\n");
     sb.append("    photos: ").append(toIndentedString(photos)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("}");

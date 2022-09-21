@@ -29,7 +29,7 @@ import javax.validation.constraints.*;
 
 
 @io.swagger.annotations.Api(description = "the person API")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-08-17T13:55:34.404Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-09-21T12:58:06.292Z")
 public class PersonApi  {
    private final PersonApiService delegate;
 
@@ -65,10 +65,16 @@ public class PersonApi  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "successful operation", response = Person.class, responseContainer = "List"),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid status value", response = Void.class) })
-    public Response findPersons(@ApiParam(value = "",required=true) @QueryParam("name") String name
+    public Response findPersons(@ApiParam(value = "") @QueryParam("name") String name
+,@ApiParam(value = "Tags to filter by", allowableValues="Male, Female") @QueryParam("gender") String gender
+,@ApiParam(value = "Tags to filter by", allowableValues="GB, US, FR, CA, BE") @QueryParam("country") List<String> country
+,@ApiParam(value = "Tags to filter by", allowableValues="permanent, temporary, both, none") @QueryParam("expo") List<String> expo
+,@ApiParam(value = "Tags to filter by", allowableValues="apple, google, microsoft, samsung") @QueryParam("company") List<String> company
+,@ApiParam(value = "start of date range") @QueryParam("startDate") String startDate
+,@ApiParam(value = "end of date range") @QueryParam("endDate") String endDate
 ,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.findPersons(name,securityContext);
+        return delegate.findPersons(name,gender,country,expo,company,startDate,endDate,securityContext);
     }
     @GET
     @Path("/{personId}")

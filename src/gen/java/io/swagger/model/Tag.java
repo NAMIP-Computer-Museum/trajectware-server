@@ -24,7 +24,7 @@ import javax.validation.Valid;
 /**
  * Tag
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-08-17T13:55:34.404Z")public class Tag   {
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-09-21T12:58:06.292Z")public class Tag   {
   @JsonProperty("id")
   private String id = null;
 

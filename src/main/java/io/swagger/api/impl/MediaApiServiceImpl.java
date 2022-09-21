@@ -48,21 +48,20 @@ public class MediaApiServiceImpl extends MediaApiService {
 	}
 	
     @Override
-    public Response getImageById(Long fileId, SecurityContext securityContext) throws NotFoundException {
+    public Response getImageById(String fileId, SecurityContext securityContext) throws NotFoundException {
         // do some magic!
-        String file = Long.toString(fileId);
         boolean found = false;
         for (Long l = 1L; l < 6L; l++) {
         	int index = allPic.get(l).getName().indexOf(".");
         	String id = allPic.get(l).getName().substring(0, index);
-        	if (file.equals(id)) {
+        	if (fileId.equals(id)) {
         		found = true;
         	}
         }
 		if (found) {
     		ResponseBuilder response = Response.ok(allPic.get(fileId));
         	response.header("Content-Disposition",
-                    "attachment; filename="+file+".jpg");
+                    "attachment; filename="+fileId+".jpg");
         	return response.build();
     	} else {
         	ResponseBuilder builder = Response.status(Status.NOT_FOUND);
@@ -74,4 +73,18 @@ public class MediaApiServiceImpl extends MediaApiService {
         //return response.build();
         //return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
     }
+    
+    @Override
+    public Response getVideoById(String fileId, SecurityContext securityContext) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+    
+    @Override
+    public Response getAudioById(String fileId, SecurityContext securityContext) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+    
+    
 }

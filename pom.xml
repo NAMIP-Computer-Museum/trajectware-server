@@ -4,7 +4,7 @@
   <artifactId>trajectware</artifactId>
   <packaging>war</packaging>
   <name>trajectware</name>
-  <version>0.6</version>
+  <version>1</version>
 
   <licenses>
     <license>

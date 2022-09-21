@@ -24,19 +24,14 @@ import javax.validation.Valid;
 /**
  * File
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-08-17T13:55:34.404Z")public class File   {
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-09-21T12:58:06.292Z")public class File   {
   @JsonProperty("id")
   private String id = null;
 
   @JsonProperty("name")
   private String name = null;
 
-  public File(String filePath) {
-	// TODO Auto-generated constructor stub
-	  this.name = filePath;
-}
-
-public File id(String id) {
+  public File id(String id) {
     this.id = id;
     return this;
   }

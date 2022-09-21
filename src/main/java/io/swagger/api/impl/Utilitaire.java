@@ -44,9 +44,7 @@ public class Utilitaire {
 			//System.out.println("element à comparer : "+tableau[i]);
 			for (int j = 0; j < tableau.length; j++) {
 				d = stringToDate(tableau[i].getCreationdate());
-				System.out.println("element qui compare : "+tableau[j]);
 				da = stringToDate(tableau[j].getCreationdate());
-				System.out.println(tableau[j]);
 				if (d.after(da)) {
 					count++;
 				}
@@ -54,7 +52,6 @@ public class Utilitaire {
 			order.put(count, tableau[i]);
 		}
 		for (int i = 0; i < tableau.length; i++) {
-			System.out.println((i+1)+"e element : "+tableau[i]);
 			tableau[i] = order.get(i);
 		}
 		return tableau;
@@ -88,7 +85,6 @@ public class Utilitaire {
 	
 	public static Artefact[] filterByDate(String startDate, String endDate, Artefact[] selection) { //, Person[] tabPers) {
 		Artefact[] finalSelection = new Artefact[selection.length];
-		System.out.println("t : "+selection.length);
 		int ts = 0;
 		Date d_1 = new Date();
 		Date d_2 = new Date();
@@ -97,23 +93,17 @@ public class Utilitaire {
 		d_1 = stringToDate(startDate);
 		d_2 = stringToDate(endDate);
 		for (int i = 0; i < selection.length; i++) {
-			System.out.println(selection[i]);
-			System.out.println("index : "+i+" t : "+selection.length);
 			d = stringToDate(selection[i].getCreationdate());
 			if (d.after(d_1) && d.before(d_2)) {
 				finalSelection[ts] = selection[i];
-				System.out.println("selection : "+selection[i]+" final : "+finalSelection[ts]);
 				ts++;
 			}
 		}
-		System.out.println("taille après 2e filtre : "+finalSelection.length);
 		if (finalSelection.length == selection.length) {
 			for (int i = ts; i < selection.length; i++) {
-				System.out.println("element à supprimer : "+finalSelection[ts]);
 				finalSelection = ArrayUtils.remove(finalSelection, ts);
 			}
 		}
-		System.out.println("taille apres suppression null : "+finalSelection.length);
 		return finalSelection;
 	}
 	

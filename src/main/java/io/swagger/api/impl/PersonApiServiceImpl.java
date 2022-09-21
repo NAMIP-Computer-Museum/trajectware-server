@@ -252,7 +252,7 @@ public class PersonApiServiceImpl extends PersonApiService {
 	}
 	
     @Override
-    public Response findPersons( @NotNull String name, SecurityContext securityContext) throws NotFoundException {
+    public Response findPersons( String name, String gender, List<String> country, List<String> expo, List<String> company, String startDate, String endDate, SecurityContext securityContext) throws NotFoundException {
         // do some magic!
     	boolean someone = false;
     	Person wantedPerson = allPerson.get(0L);

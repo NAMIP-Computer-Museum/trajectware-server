@@ -28,7 +28,7 @@ import javax.validation.Valid;
 /**
  * Person
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-08-17T13:55:34.404Z")public class Person   {
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-09-21T12:58:06.292Z")public class Person   {
   @JsonProperty("id")
   private Long id = null;
 
@@ -38,6 +38,9 @@ import javax.validation.Valid;
   @JsonProperty("firstname")
   private String firstname = null;
 
+  @JsonProperty("gender")
+  private String gender = null;
+
   @JsonProperty("birthdate")
   private String birthdate = null;
 
@@ -46,6 +49,18 @@ import javax.validation.Valid;
 
   @JsonProperty("country")
   private String country = null;
+
+  @JsonProperty("description")
+  private String description = null;
+
+  @JsonProperty("education")
+  private String education = null;
+
+  @JsonProperty("function")
+  private String function = null;
+
+  @JsonProperty("company")
+  private String company = null;
 
   @JsonProperty("photos")
   private List<File> photos = null;
@@ -110,6 +125,25 @@ import javax.validation.Valid;
     this.firstname = firstname;
   }
 
+  public Person gender(String gender) {
+    this.gender = gender;
+    return this;
+  }
+
+  /**
+   * Get gender
+   * @return gender
+   **/
+  @JsonProperty("gender")
+  @ApiModelProperty(example = "Male", value = "")
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
   public Person birthdate(String birthdate) {
     this.birthdate = birthdate;
     return this;
@@ -165,6 +199,82 @@ import javax.validation.Valid;
 
   public void setCountry(String country) {
     this.country = country;
+  }
+
+  public Person description(String description) {
+    this.description = description;
+    return this;
+  }
+
+  /**
+   * Get description
+   * @return description
+   **/
+  @JsonProperty("description")
+  @ApiModelProperty(example = "William Henry Gates III (born October 28, 1955) is an American business magnate, software developer, investor, author, and philanthropist. He is a co-founder of Microsoft, along with his late childhood friend Paul Allen. During his career at Microsoft, Gates held the positions of chairman, chief executive officer (CEO), president and chief software architect, while also being the largest individual shareholder until May 2014. He was a major entrepreneur of the microcomputer revolution of the 1970s and 1980s.", value = "")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Person education(String education) {
+    this.education = education;
+    return this;
+  }
+
+  /**
+   * Get education
+   * @return education
+   **/
+  @JsonProperty("education")
+  @ApiModelProperty(example = "engineer", value = "")
+  public String getEducation() {
+    return education;
+  }
+
+  public void setEducation(String education) {
+    this.education = education;
+  }
+
+  public Person function(String function) {
+    this.function = function;
+    return this;
+  }
+
+  /**
+   * Get function
+   * @return function
+   **/
+  @JsonProperty("function")
+  @ApiModelProperty(example = "Software developper", value = "")
+  public String getFunction() {
+    return function;
+  }
+
+  public void setFunction(String function) {
+    this.function = function;
+  }
+
+  public Person company(String company) {
+    this.company = company;
+    return this;
+  }
+
+  /**
+   * Get company
+   * @return company
+   **/
+  @JsonProperty("company")
+  @ApiModelProperty(example = "Microsoft", value = "")
+  public String getCompany() {
+    return company;
+  }
+
+  public void setCompany(String company) {
+    this.company = company;
   }
 
   public Person photos(List<File> photos) {
@@ -236,16 +346,21 @@ import javax.validation.Valid;
     return Objects.equals(this.id, person.id) &&
         Objects.equals(this.lastname, person.lastname) &&
         Objects.equals(this.firstname, person.firstname) &&
+        Objects.equals(this.gender, person.gender) &&
         Objects.equals(this.birthdate, person.birthdate) &&
         Objects.equals(this.deathdate, person.deathdate) &&
         Objects.equals(this.country, person.country) &&
+        Objects.equals(this.description, person.description) &&
+        Objects.equals(this.education, person.education) &&
+        Objects.equals(this.function, person.function) &&
+        Objects.equals(this.company, person.company) &&
         Objects.equals(this.photos, person.photos) &&
         Objects.equals(this.tags, person.tags);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, lastname, firstname, birthdate, deathdate, country, photos, tags);
+    return Objects.hash(id, lastname, firstname, gender, birthdate, deathdate, country, description, education, function, company, photos, tags);
   }
 
 
@@ -257,9 +372,14 @@ import javax.validation.Valid;
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    lastname: ").append(toIndentedString(lastname)).append("\n");
     sb.append("    firstname: ").append(toIndentedString(firstname)).append("\n");
+    sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
     sb.append("    birthdate: ").append(toIndentedString(birthdate)).append("\n");
     sb.append("    deathdate: ").append(toIndentedString(deathdate)).append("\n");
     sb.append("    country: ").append(toIndentedString(country)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    education: ").append(toIndentedString(education)).append("\n");
+    sb.append("    function: ").append(toIndentedString(function)).append("\n");
+    sb.append("    company: ").append(toIndentedString(company)).append("\n");
     sb.append("    photos: ").append(toIndentedString(photos)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("}");

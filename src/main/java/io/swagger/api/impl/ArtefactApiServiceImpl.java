@@ -144,7 +144,7 @@ public class ArtefactApiServiceImpl extends ArtefactApiService {
 	}
 
 	@Override
-    public Response findArtefactq( @NotNull List<String> tags,  String startDate,  String endDate, SecurityContext securityContext) throws NotFoundException {
+    public Response findArtefact( @NotNull List<String> tags,  String startDate,  String endDate, SecurityContext securityContext) throws NotFoundException {
         // do some magic!
 		if (tags.size() == 0) {
 			if (startDate == null && endDate == null) {

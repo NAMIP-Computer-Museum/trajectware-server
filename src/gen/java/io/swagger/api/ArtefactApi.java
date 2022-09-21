@@ -29,7 +29,7 @@ import javax.validation.constraints.*;
 
 
 @io.swagger.annotations.Api(description = "the artefact API")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-08-17T13:55:34.404Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2022-09-21T12:58:06.292Z")
 public class ArtefactApi  {
    private final ArtefactApiService delegate;
 
@@ -65,12 +65,12 @@ public class ArtefactApi  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "successful operation", response = Artefact.class, responseContainer = "List"),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid tag value", response = Void.class) })
-    public Response findArtefactq(@ApiParam(value = "Tags to filter by",required=true, allowableValues="CPU, IHM, Micro, OS, APP, ...") @QueryParam("tags") List<String> tags
+    public Response findArtefact(@ApiParam(value = "Tags to filter by",required=true, allowableValues="CPU, IHM, Micro, OS, APP, ...") @QueryParam("tags") List<String> tags
 ,@ApiParam(value = "start of date range") @QueryParam("startDate") String startDate
 ,@ApiParam(value = "end of date range") @QueryParam("endDate") String endDate
 ,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.findArtefactq(tags,startDate,endDate,securityContext);
+        return delegate.findArtefact(tags,startDate,endDate,securityContext);
     }
     @GET
     @Path("/{artefactId}")
