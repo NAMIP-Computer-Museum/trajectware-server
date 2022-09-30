@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import io.swagger.api.NotFoundException;
 
@@ -25,6 +26,11 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -48,6 +54,9 @@ public class ArtefactApiServiceImpl extends ArtefactApiService {
 	Artefact[] orderedSelection;
 	static String path = "./src/main/webapp/Artefact/ArtefactById.txt";
 	File selectionFilePath;
+	static String url;
+	static String login;
+	static String password;
 	
 
 	static {
@@ -129,7 +138,8 @@ public class ArtefactApiServiceImpl extends ArtefactApiService {
 	    allData.put(5L, art_5);
 	    
 		tab = new Artefact[] {art_1,art_2,art_3,art_4,art_5};
-	    
+		
+			    
 	    //File file = new File("./src/main/webapp/Artefact/All Artefact.txt");	    
 	    //Utilitaire.writeArtefacts(file, tab);
 	    /*
@@ -182,7 +192,7 @@ public class ArtefactApiServiceImpl extends ArtefactApiService {
 			return Response.ok(orderedSelection).build();
 		}
 	}
-	
+	/*
     @Override
     public Response getArtefactById(Long artefactId, SecurityContext securityContext) throws NotFoundException {
         // do some magic!    	
@@ -195,5 +205,47 @@ public class ArtefactApiServiceImpl extends ArtefactApiService {
 			return builder.build();
         }
         //return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+    */
+    @Override
+    public Response getArtefactById(Long artefactId, SecurityContext securityContext) throws NotFoundException {
+    	/*
+    	if (allData.containsKey(artefactId)) {
+        	return Response.ok(allData.get(artefactId)).build();
+        } else {
+        	ResponseBuilder builder = Response.status(Status.NOT_FOUND);
+			builder.type(MediaType.APPLICATION_JSON);
+			builder.entity("{ \"msg\" : \""+artefactId+" not found\" }");
+			return builder.build();
+        }
+    	*/
+		
+    	
+		String strSql = "SELECT * FROM GENERAL WHERE Id=?";
+		Connection connect = DBManager.getConnection();
+		int intId = artefactId.intValue();
+		try (PreparedStatement pStatement = connect.prepareStatement(strSql)) {
+			// Permet de remplacer les "?" par l'argument donné ici artefactId
+			pStatement.setInt(1, intId);
+			//System.out.println(pStatement);
+			ResultSet resultSet = pStatement.executeQuery();
+			int rsId = resultSet.getInt(1);
+			String rsAnnee = resultSet.getString(2);
+			String rsSociété = resultSet.getString(3);
+			String rsName = resultSet.getString(4);
+			String rsLocalisation = resultSet.getString(5);
+			String rsDescription = resultSet.getString(6);
+			String rsType = resultSet.getString(7);
+			String rsFullDate = resultSet.getString(8);
+						
+			System.out.println("Id : "+rsId+"\nAnnée : "+rsAnnee+"\nSociété : "
+									+rsSociété+"\nName : "+rsName+"\nLocalisation : "
+									+rsLocalisation+"\nDescription : "+rsDescription
+									+"\nType : "+rsType+"\nFull Date : "+rsFullDate);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Response.ok(allData.get(artefactId)).build();
+		
     }
 }
